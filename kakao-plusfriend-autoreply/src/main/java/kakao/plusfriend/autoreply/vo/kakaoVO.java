@@ -1,6 +1,5 @@
 package kakao.plusfriend.autoreply.vo;
 
-/** kakao에서 넘겨준 파라미터 */
 public class kakaoVO {
 	private String user_key;
 	private String type;

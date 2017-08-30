@@ -3,6 +3,7 @@ package kakao.plusfriend.autoreply;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,12 @@ import kakao.plusfriend.autoreply.vo.kakaoVO;
 import kakao.plusfriend.autoreply.vo.keyboardVO;
 import kakao.plusfriend.autoreply.vo.messageVO;
 
+
 @Controller
 public class ReplyController implements Reply{
-
+	@Autowired
+	kakaoMessage kakaoMsg;
+	
 	@Override
 	@RequestMapping(value = "/keyboard", method = RequestMethod.GET)
 	public @ResponseBody keyboardVO keyboard() {
@@ -32,7 +36,7 @@ public class ReplyController implements Reply{
 	@Override
 	@RequestMapping(value = "/message", method = RequestMethod.POST)
 	public @ResponseBody messageVO message(kakaoVO vo) {
-		
+		/*
 		Class kakao_plusfriend_autoreply_Message;
 		Class[] parameterTypes = { kakaoVO.class };
 		Object[] paramter = { vo };
@@ -57,8 +61,9 @@ public class ReplyController implements Reply{
 		} catch (IllegalArgumentException e) {
 		} catch (InvocationTargetException e) {
 		}
+		*/
 		
-		return messageVO;
+		return kakaoMsg.responseMessage(vo);
 	}
 
 	@Override
