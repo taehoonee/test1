@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="kakao.plusfriend.autoreplay">
+	<logger name="kakao.plusfriend.autoreply">
 		<level value="info" />
 	</logger>
 	
