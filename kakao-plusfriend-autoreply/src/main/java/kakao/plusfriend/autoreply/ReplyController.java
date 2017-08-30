@@ -26,8 +26,6 @@ public class ReplyController implements Reply{
 		String type = "text";
 		keyboard.setType(type);
 		
-		ResponseEntity.status(HttpStatus.OK);
-		
 		return keyboard;
 	}
 
@@ -43,7 +41,7 @@ public class ReplyController implements Reply{
 		
 		try {
 			kakao_plusfriend_autoreply_Message 
-				= Class.forName("kakao.plusfriend.autoreply.Message");
+				= kakao.plusfriend.autoreply.Message.class;
 			
 			
 			Object instance 
@@ -58,8 +56,6 @@ public class ReplyController implements Reply{
 		} catch (SecurityException e) {
 		} catch (IllegalArgumentException e) {
 		} catch (InvocationTargetException e) {
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		}
 		
 		return messageVO;
