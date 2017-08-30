@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,7 +37,7 @@ public class ReplyController implements Reply{
 
 	@Override
 	@RequestMapping(value = "/message", method = RequestMethod.POST)
-	public @ResponseBody messageVO message(kakaoVO vo) {
+	public @ResponseBody messageVO message(@RequestBody kakaoVO vo) {
 		/*
 		Class kakao_plusfriend_autoreply_Message;
 		Class[] parameterTypes = { kakaoVO.class };
@@ -68,7 +70,7 @@ public class ReplyController implements Reply{
 
 	@Override
 	@RequestMapping(value = {"/friend", "/friend/{user_key}"}, method = {RequestMethod.POST, RequestMethod.DELETE})
-	public @ResponseBody void friend(@PathVariable String user_key, kakaoVO vo) {
+	public @ResponseBody void friend(@PathVariable String user_key, @RequestBody kakaoVO vo) {
 	}
 
 	@Override

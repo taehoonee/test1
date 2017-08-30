@@ -1,5 +1,7 @@
 package kakao.plusfriend.autoreply.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,7 +12,7 @@ public class ReplyDaoImplPostgresql implements ReplyDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public Object selectRegularContent(kakaoVO vo) {
-		return sqlSession.selectOne("selectRegularContent", vo);
+	public List<Object> selectRegularContent(kakaoVO vo) {
+		return sqlSession.selectList("kakaoTextReply.selectRegularContent", vo);
 	}
 }

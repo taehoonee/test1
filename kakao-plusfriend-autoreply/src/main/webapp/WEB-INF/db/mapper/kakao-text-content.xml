@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kakaoTextReply">
+	  <select id="selectRegularContent" parameterType="kakao.plusfriend.autoreply.dao.ReplyDao" resultType="java.util.Map">
+	    	select 
+	    		txt.txt_content
+	    	from
+	    		tbl_kakao_text_contents txt
+	    		inner join tbl_kakao_text_regular_link link
+	    		on txt.txt_id = link.txt_id
+	    		inner join tbl_kakao_regular_contents reg
+	    		on reg.reg_id = link.reg_id
+	    	where reg.reg_content like '%' || #{content} || '%'
+	  </select>
+</mapper>

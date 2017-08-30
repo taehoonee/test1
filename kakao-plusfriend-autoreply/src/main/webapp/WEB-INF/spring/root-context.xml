@@ -8,9 +8,35 @@
 	<bean id="ReplyDao" class="kakao.plusfriend.autoreply.dao.ReplyDaoImplPostgresql"></bean>
 	
 		
-		
+			<!-- PostgreSQL JDBC setting -->
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource" >
+
+		<property name="driverClass" value="org.postgresql.Driver" />
+        <property name="url" value="jdbc:postgresql://localhost:5432/kakaoapidb"/>
+        <property name="username" value="kakaoapi"/>
+        <property name="password" value="1qazxsw@"/>
+
+	</bean>		
+
+	
+
+	<!-- mybatis setting -->
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
+
+		<property name="dataSource" ref="dataSource" />
+
+		<property name="configLocation"
+
+                              value="/WEB-INF/db/mybatis-config.xml"/>
+
+	</bean>
+
+
+
 	<!-- Mybatis setting -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="org.postgresql.Driver"/>
         <property name="url" value="jdbc:postgresql://localhost:5432/kakaoapidb"/>
         <property name="username" value="kakaoapi"/>
@@ -25,7 +51,7 @@
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="sqlSession"/>
     </bean> 
-
+ -->
 
 
 </beans>
