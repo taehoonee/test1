@@ -7,9 +7,7 @@
 <configuration>
 
 	<mappers>
-
 		<mapper resource="/WEB-INF/db/mapper/kakao-text-content.xml" />
-
 	</mappers>
 
 </configuration>

@@ -7,17 +7,24 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import kakao.plusfriend.autoreply.dao.ReplyDao;
+import kakao.plusfriend.autoreply.dao.ReplyDaoImplPostgresql;
 import kakao.plusfriend.autoreply.vo.kakaoVO;
 import kakao.plusfriend.autoreply.vo.messageVO;
 
 
 public class kakaoMessage {
+	
 	@Autowired
-	ReplyDao dao;
+	private ReplyDao dao;
 	
-	public kakaoMessage() { }
-	
-	
+	public void setDao(ReplyDao dao) {
+		this.dao = dao;
+	}
+
+
+
+
+
 	public messageVO responseMessage(kakaoVO vo) {
 		messageVO messagevo = new messageVO();
 		String type = vo.getType();
@@ -26,9 +33,12 @@ public class kakaoMessage {
 		if ( "text".equals(type) ) {
 			/* text 타입 */
 			//messagevo.getMessage().setText("오호~ 어서오너라!!");
+			System.out.println("dao : " + dao);
 			List<Object> data = dao.selectRegularContent(vo);
 			
 			if (data != null) {
+				
+				
 				Map<String, Object> map = (Map)data.get(random.nextInt(data.size()));
 				messagevo.getMessage().setText(map.get("text_content").toString());		
 			} else {
