@@ -11,7 +11,7 @@
 		    from
 		        tbl_kakao_reg_contents
 		    where
-		         #{content} like '%' || reg_content || '%'
+		         '안녕하세요' like '%' || reg_content || '%'
 		)
 		
 		SELECT 

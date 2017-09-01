@@ -1,13 +1,10 @@
 package kakao.plusfriend.autoreply;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +18,8 @@ import kakao.plusfriend.autoreply.vo.messageVO;
 
 @Controller
 public class ReplyController implements Reply{
+	Logger log = Logger.getLogger(this.getClass());
+	
 	@Autowired
 	kakaoMessage kakaoMsg;
 	
@@ -28,16 +27,23 @@ public class ReplyController implements Reply{
 	@RequestMapping(value = "/keyboard", method = RequestMethod.GET)
 	public @ResponseBody keyboardVO keyboard() {
 		keyboardVO keyboard = new keyboardVO();
+		log.info("===keyboard call");
 		
 		String type = "text";
 		keyboard.setType(type);
 		
+		log.info("===type\t" + keyboard.getType());
 		return keyboard;
 	}
 
 	@Override
 	@RequestMapping(value = "/message", method = RequestMethod.POST)
 	public @ResponseBody messageVO message(@RequestBody kakaoVO vo) {
+		log.info("===message call");
+		log.info("===user_key\t" + vo.getUser_key());
+		log.info("===type\t" + vo.getType());
+		log.info("===content\t" + vo.getContent());
+		
 		/*
 		Class kakao_plusfriend_autoreply_Message;
 		Class[] parameterTypes = { kakaoVO.class };

@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kakaoTextReply">
-	  <select id="selectRegularContent" parameterType="kakao.plusfriend.autoreply.dao.ReplyDao" resultType="java.util.Map">
+	  <select id="selectRegularContent" parameterType="kakao.plusfriend.autoreply.vo.kakaoVO" resultType="java.util.Map">
 	    with tbl_regular as (
 		    select 
 		        reg_id,

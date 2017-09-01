@@ -15,12 +15,7 @@ public class ReplyDaoImplPostgresql implements ReplyDao{
 		this.sqlSession = sqlSession;
 	}
 
-	public SqlSessionTemplate getSqlSession() {
-		return sqlSession;
-	}
-	
 	public List<Object> selectRegularContent(kakaoVO vo) {
-		System.out.println("sqlSession : " + sqlSession);
 		return sqlSession.selectList("kakaoTextReply.selectRegularContent", vo);
 	}
 }

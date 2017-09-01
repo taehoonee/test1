@@ -4,15 +4,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import kakao.plusfriend.autoreply.dao.ReplyDao;
-import kakao.plusfriend.autoreply.dao.ReplyDaoImplPostgresql;
 import kakao.plusfriend.autoreply.vo.kakaoVO;
 import kakao.plusfriend.autoreply.vo.messageVO;
 
 
 public class kakaoMessage {
+	Logger log = Logger.getLogger(this.getClass());
 	
 	@Autowired
 	private ReplyDao dao;
@@ -21,46 +22,45 @@ public class kakaoMessage {
 		this.dao = dao;
 	}
 
-
-
-
-
 	public messageVO responseMessage(kakaoVO vo) {
-		messageVO messagevo = new messageVO();
+		messageVO messagevo = null;
 		String type = vo.getType();
-		Random random = new Random();
 		
 		if ( "text".equals(type) ) {
 			/* text 타입 */
-			//messagevo.getMessage().setText("오호~ 어서오너라!!");
-			System.out.println("dao : " + dao);
-			List<Object> data = dao.selectRegularContent(vo);
-			
-			if (data != null) {
-				
-				
-				Map<String, Object> map = (Map)data.get(random.nextInt(data.size()));
-				messagevo.getMessage().setText(map.get("text_content").toString());		
-			} else {
-				messagevo.getMessage().setText("미안하구나...그대가 말하는게 뭔지 모르겠느니라.");
-			}
-			
+			messagevo = text(vo);
 		} else {
 			/* photo 타입 */
-			
+			messagevo = photo(vo);
 		}
 		
 		return messagevo;
 	}
 
-	/*public messageVO text(kakaoVO vo) {
+	messageVO text(kakaoVO vo) {
 		messageVO messagevo = new messageVO();
-		messagevo.setText("Hello!! This is Test");	
+		Random random = new Random();
+		
+		/* text 타입 */
+		log.info("===test.dao : " + dao);
+		
+		List<Object> data = dao.selectRegularContent(vo);
+		log.info("===test.data : " + data);
+		
+		if (data != null) {
+			log.info("===test.random.nextInt(data.size()) : " + random.nextInt(data.size()));
+			
+			Map<String, Object> map = (Map)data.get(random.nextInt(data.size()));
+			messagevo.getMessage().setText(map.get("txt_content").toString());		
+		} else {
+			messagevo.getMessage().setText("미안하구나...그대가 말하는게 뭔지 모르겠느니라.");
+		}
+		
 		return messagevo;
 	}
 	
-	public messageVO photo(kakaoVO vo) {
+	messageVO photo(kakaoVO vo) {
 		messageVO messagevo = new messageVO();
 		return messagevo;
-	}*/	
+	}	
 }
