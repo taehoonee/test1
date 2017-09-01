@@ -47,7 +47,7 @@ public class kakaoMessage {
 		List<Object> data = dao.selectRegularContent(vo);
 		log.info("===test.data : " + data);
 		
-		if (data != null) {
+		if (data != null && data.size() > 0) {
 			log.info("===test.random.nextInt(data.size()) : " + random.nextInt(data.size()));
 			
 			Map<String, Object> map = (Map)data.get(random.nextInt(data.size()));
