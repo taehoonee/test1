@@ -53,7 +53,8 @@ public class kakaoMessage {
 			Map<String, Object> map = (Map)data.get(random.nextInt(data.size()));
 			messagevo.getMessage().setText(map.get("txt_content").toString());		
 		} else {
-			messagevo.getMessage().setText("미안하구나...그대가 말하는게 뭔지 모르겠느니라.");
+			messagevo.getMessage().setText("미안하구나...그대가 말하는게 뭔지 모르겠느니라.\n 짐에게 알려주고 싶은게 있으면,"
+					+ " http://220.230.124.70/kakao-plusfriend-autoreply/bot 로 들어가보라 하는구나!");
 		}
 		
 		return messagevo;

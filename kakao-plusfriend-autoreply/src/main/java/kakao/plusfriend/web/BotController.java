@@ -42,6 +42,7 @@ public class BotController {
 		} else {
 			map.put("info", "fail");
 		}
+		log.info("===insertKakaoRegContent\t" + map);
 		
 		return map;
 	}
@@ -58,6 +59,7 @@ public class BotController {
 		} else {
 			map.put("info", "fail");
 		}
+		log.info("===insertKakaoRegContent\t" + map);
 		
 		return map;
 	}
@@ -74,6 +76,7 @@ public class BotController {
 		} else {
 			map.put("info", "fail");
 		}
+		log.info("===insertKakaoTextLink\t" + map);
 		
 		return map;
 	}

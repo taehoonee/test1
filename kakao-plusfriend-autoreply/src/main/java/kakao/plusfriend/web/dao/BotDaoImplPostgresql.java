@@ -17,8 +17,8 @@ public class BotDaoImplPostgresql implements BotDao{
 	
 	@Override
 	public int insertKakaoTextContent(contentVO vo) {
-		int insert = sqlSession.insert("kakaoTextReply.insertKakaoTextContent", vo);;
-		sqlSession.commit();
+		int insert = sqlSession.insert("kakaoTextReply.insertKakaoTextContent", vo);
+		/*sqlSession.commit();*/
 		/*sqlSession.close();*/
 		
 		return insert;
@@ -27,7 +27,7 @@ public class BotDaoImplPostgresql implements BotDao{
 	@Override
 	public int insertKakaoRegContent(contentVO vo) {
 		int insert = sqlSession.insert("kakaoTextReply.insertKakaoRegContent", vo);
-		sqlSession.commit();
+		/*sqlSession.commit();*/
 		/*sqlSession.close();*/
 		
 		return insert;
@@ -36,7 +36,7 @@ public class BotDaoImplPostgresql implements BotDao{
 	@Override
 	public int insertKakaoTextLink(contentVO vo) {
 		int insert = sqlSession.insert("kakaoTextReply.insertKakaoTextLink", vo);
-		sqlSession.commit();
+		/*sqlSession.commit();*/
 		/*sqlSession.close();*/
 		
 		return insert;

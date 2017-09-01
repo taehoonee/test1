@@ -7,10 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>루에게 공부시키는 장소</title>
-<link rel="icon" href="/kakao-plusfriend-autoreply/resources/images/favicon.png" type="image/png">
-<link href="/kakao-plusfriend-autoreply/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/kakao-plusfriend-autoreply/resources/bootstrap/css/cover.css" rel="stylesheet">
-<link href="/kakao-plusfriend-autoreply/resources/css/lu.css" rel="stylesheet">
+<link rel="icon" href="/autoreply/resources/images/favicon.png" type="image/png">
+<link href="/autoreply/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/autoreply/resources/bootstrap/css/cover.css" rel="stylesheet">
+<link href="/autoreply/resources/css/lu.css" rel="stylesheet">
 
 
 </head>
@@ -33,7 +33,7 @@
 					</div>
 				</div>
 				<div class="inner cover">
-					<img alt="루" src="/kakao-plusfriend-autoreply/resources/images/lu.png" class="col-xs-12"/>
+					<img alt="루" src="/autoreply/resources/images/lu.png" class="col-xs-12"/>
 					<h1 class="cover-heading">루에게 공부시켜주세요!</h1>
 					<p class="lead">아직도 루가 모르는 언어가 잔득! 루에게 말을 알려주세요 ㅠㅠ  <code>http://pf.kakao.com/_rxmxmjxl</code>을 통해서 루와 플러스친구도 될 수 있습니다~</p>
 					<p class="lead">
@@ -123,8 +123,8 @@
 		</div>
 	</div>
 	
-	<script type="text/javascript" src="/kakao-plusfriend-autoreply/resources/jquery/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="/kakao-plusfriend-autoreply/resources/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/autoreply/resources/jquery/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/autoreply/resources/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 	/* 텍스트 저장 */
 	$('#txt_content_btn').on('click', function(){
@@ -137,7 +137,7 @@
 		
 		$.ajax({
 			type : 'POST',
-			url : '/kakao-plusfriend-autoreply/addtext',
+			url : '/autoreply/addtext',
 			datatype : 'json',
 			contentType: 'application/json; charset=UTF-8;',
 			data : JSON.stringify({ "txt_content" : txt_content }),
@@ -168,7 +168,7 @@
 		
 		$.ajax({
 			type : 'POST',
-			url : '/kakao-plusfriend-autoreply/addreg',
+			url : '/autoreply/addreg',
 			datatype : 'json',
 			contentType: 'application/json; charset=UTF-8;',
 			data : JSON.stringify({ "reg_content" : reg_content }),
@@ -193,7 +193,7 @@
 	$('#reg_content_btn').on('click', function(){
 		$.ajax({
 			type : 'POST',
-			url : '/kakao-plusfriend-autoreply/addlink',
+			url : '/autoreply/addlink',
 			datatype : 'json',
 			contentType: 'application/json; charset=UTF-8;',
 			data : JSON.stringify({ "txt_id" : $('#txt_id').val(), "reg_id" : $('#reg_id').val() }),
@@ -223,7 +223,7 @@
 		$('#txt_id').empty();
 		$.ajax({
 			type : 'POST',
-			url : '/kakao-plusfriend-autoreply/textlist',
+			url : '/autoreply/textlist',
 			success: function(items) {
 				$.each(items, function (i, item) {
 				    $('#txt_id').append($('<option>', { 
@@ -240,7 +240,7 @@
 		$.ajax({
 			method : 'POST',
 			datatype : 'json',
-			url : '/kakao-plusfriend-autoreply/regularlist',
+			url : '/autoreply/regularlist',
 			success: function(items) {
 				$.each(items, function (i, item) {
 				    $('#reg_id').append($('<option>', { 
