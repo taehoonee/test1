@@ -11,21 +11,26 @@
 	<context:annotation-config/>
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	
+	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+
 	<bean id="kakaoMessage" class="kakao.plusfriend.autoreply.kakaoMessage">
 		<property name="dao" ref="ReplyDao"></property>
 	</bean>
+
 	<bean id="ReplyDao" class="kakao.plusfriend.autoreply.dao.ReplyDaoImplPostgresql" >
 		<property name="sqlSession" ref="sqlSession"></property>
-	
+	</bean>
+
+	<bean id="BotDao" class="kakao.plusfriend.web.dao.BotDaoImplPostgresql" >
+		<property name="sqlSession" ref="sqlSession"></property>
 	</bean>
 	
 	
 	<!-- PostgreSQL JDBC setting -->
 	<bean id="dataSourceInfo" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-        <!-- <property name="url" value="jdbc:postgresql://220.230.124.70:5432/kakaoapidb"/> -->
-        <property name="url" value="jdbc:postgresql://127.0.0.1:5432/kakaoapidb"/>
+        <property name="url" value="jdbc:postgresql://220.230.124.70:5432/kakaoapidb"/>
+        <!-- <property name="url" value="jdbc:postgresql://127.0.0.1:5432/kakaoapidb"/> -->
         <property name="username" value="kakaoapi"/>
         <property name="password" value="1qazxsw@"/>
 	</bean>
@@ -42,7 +47,7 @@
  
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath:kakao/plusfriend/autoreply/db/mapper/*.xml" />
+		<property name="mapperLocations" value="classpath:kakao/plusfriend/db/mapper/*.xml" />
 	</bean>
 	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">

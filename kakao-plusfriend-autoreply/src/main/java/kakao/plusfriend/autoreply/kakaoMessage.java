@@ -14,7 +14,7 @@ import kakao.plusfriend.autoreply.vo.messageVO;
 
 public class kakaoMessage {
 	Logger log = Logger.getLogger(this.getClass());
-	
+	 
 	@Autowired
 	private ReplyDao dao;
 	
