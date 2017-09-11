@@ -29,8 +29,8 @@
 	<!-- PostgreSQL JDBC setting -->
 	<bean id="dataSourceInfo" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-        <property name="url" value="jdbc:postgresql://220.230.124.70:5432/kakaoapidb"/>
-        <!-- <property name="url" value="jdbc:postgresql://127.0.0.1:5432/kakaoapidb"/> -->
+        <!-- <property name="url" value="jdbc:postgresql://220.230.124.70:5432/kakaoapidb"/> -->
+        <property name="url" value="jdbc:postgresql://127.0.0.1:5432/kakaoapidb"/>
         <property name="username" value="kakaoapi"/>
         <property name="password" value="1qazxsw@"/>
 	</bean>

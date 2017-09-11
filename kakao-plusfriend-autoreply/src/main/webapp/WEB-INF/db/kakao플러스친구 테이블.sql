@@ -22,3 +22,11 @@ create table tbl_kakao_text_regular_link (
 	constraint tbl_kakao_text_regular_link_pk primary key(txt_id, reg_id)
 );
 
+create sequence kakao_commands_seq;
+create table tbl_kakao_commands (
+	cmd_id integer primary key default nextval('kakao_commands_seq'),
+	cmd_name text not null,
+	cmd_method text not null,
+	create_date timestamp default now(),
+	modify_date timestamp default now()
+);

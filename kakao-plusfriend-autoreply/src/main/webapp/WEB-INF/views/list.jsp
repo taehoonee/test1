@@ -190,7 +190,7 @@
 	
 	
 	/* 링크 저장 */
-	$('#reg_content_btn').on('click', function(){
+	$('#link_content_btn').on('click', function(){
 		$.ajax({
 			type : 'POST',
 			url : '/kakao-plusfriend-autoreply/addlink',

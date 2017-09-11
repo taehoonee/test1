@@ -44,7 +44,7 @@
 	  
 	  <insert id="insertKakaoTextLink" parameterType="kakao.plusfriend.web.vo.contentVO">
 	  	insert into 
-	  	tbl_kakao_text_contents(
+	  	tbl_kakao_text_regular_link(
 	  		txt_id,
 	  		reg_id
 	  	) values (

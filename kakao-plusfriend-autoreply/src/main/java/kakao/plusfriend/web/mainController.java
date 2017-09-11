@@ -12,25 +12,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kakao.plusfriend.web.dao.BotDao;
+import kakao.plusfriend.web.dao.mainDao;
 import kakao.plusfriend.web.vo.contentVO;
 
 @Controller
-public class BotController {
+public class mainController {
 	Logger log = Logger.getLogger(this.getClass());
 	
 	@Autowired
-	private BotDao dao;
-	public void setDao(BotDao dao) {
+	private mainDao dao;
+	public void setDao(mainDao dao) {
 		this.dao = dao;
 	}
 	
-	@RequestMapping(value="/bot", method=RequestMethod.GET)
+	/** 페이지 이동 */
+	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public String start() {
-		return "bot";
+		return "main";
+	}
+	
+	@RequestMapping(value="/list", method=RequestMethod.GET)
+	public String list() {
+		return "list";
 	}
 	
 	
+	/** 처리 */
 	@RequestMapping(value="/addtext", method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> addtext(@RequestBody contentVO vo){
 		Map<String, Object> map = new HashMap<String, Object>();	
