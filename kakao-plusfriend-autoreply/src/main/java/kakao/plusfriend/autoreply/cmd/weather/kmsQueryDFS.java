@@ -18,8 +18,8 @@ public class kmsQueryDFS {
 
 	public static JSONArray getDFS(JSONObject location) {
 		String rssFeed= "http://www.kma.go.kr/wid/queryDFS.jsp?gridx=%s&gridy=%s";
-		String x = location.get("lat").toString();
-		String y = location.get("lng").toString();
+		String x = location.get("nx").toString();
+		String y = location.get("ny").toString();
 		
 		rssFeed = String.format(rssFeed, x, y);
 
@@ -78,4 +78,5 @@ public class kmsQueryDFS {
 		return DFS;
 		
 	}
+
 }

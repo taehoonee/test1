@@ -1,11 +1,11 @@
 package kakao.plusfriend.autoreply.cmd;
 
-import java.util.Map;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import kakao.plusfriend.autoreply.cmd.weather.googleAPIgeocode;
-import kakao.plusfriend.autoreply.cmd.weather.kmsQueryDFS;
+import kakao.plusfriend.autoreply.cmd.weather.openweathermapData;
 import kakao.plusfriend.autoreply.vo.messageVO;
 
 public class kakaoCommand {
@@ -17,24 +17,32 @@ public class kakaoCommand {
 		StringBuilder builder = new StringBuilder();
 		
 		if (address != null) {
-			JSONArray dfs = kmsQueryDFS.getDFS(googleAPIgeocode.getCode(address));
-			int loop = (7 < dfs.size()) ? 7 : dfs.size();
+			JSONArray data = openweathermapData.getData(googleAPIgeocode.getCode(address));
+			int loop = (7 < data.size()) ? 7 : data.size();
 			
 			builder.append("시엘이 미래를 보고 왔다는구나~ 한번 보자구나.\n");
 			for (int i=0; i<loop; i++) {
-				Map<String, Object> map = (Map<String, Object>)dfs.get(i);
+				JSONObject object = (JSONObject)data.get(i);
 				
-				String hour = map.get("hour").toString();
-				String wfkor = map.get("wfkor").toString();
-				String tmx = map.get("tmx").toString();
-				String tmn = map.get("tmn").toString();
+				String dt_text = object.get("dt_txt").toString();
+				JSONObject main = (JSONObject)object.get("main");
 				
-				builder.append(hour);
-				builder.append("시,");
-				builder.append(wfkor);
-				builder.append(",최대");
-				builder.append(tmn + "도 최소");
-				builder.append(tmx + "도\n");	
+				// 최저 , 최고 기온
+				String temp_min = main.get("temp_min").toString();
+				String temp_max = main.get("temp_max").toString();
+				
+				JSONArray arr = (JSONArray)object.get("weather");
+				JSONObject weather = (JSONObject)arr.get(0);
+				// 날씨 상태
+				String status = weather.get("main").toString();
+				
+				
+				builder.append(dt_text);
+				builder.append(",");
+				builder.append(status);
+				builder.append(",최저");
+				builder.append(temp_min + "º 최고");
+				builder.append(temp_max + "º\n");	
 			}
 			
 			messagevo.getMessage().setText(builder.toString());
