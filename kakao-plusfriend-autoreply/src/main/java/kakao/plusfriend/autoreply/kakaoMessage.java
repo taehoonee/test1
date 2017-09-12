@@ -60,7 +60,7 @@ public class kakaoMessage {
 	messageVO command(kakaoVO vo) {
 		messageVO messagevo = null;
 		String content = vo.getContent();
-		String command = (content.indexOf(' ') != -1) ? content.substring(0, content.indexOf(' ')) : null;
+		String command = (content.indexOf(' ') != -1) ? content.substring(0, content.indexOf(' ')) : content;
 		
 		Map<String, Object> resultMap = (Map<String, Object>)dao.selectRegularContent(command);
 		if (resultMap != null) {
@@ -74,14 +74,14 @@ public class kakaoMessage {
 			Class kakaoCommandClass = been.getClass();
 			String methodName = resultMap.get("method_name").toString();
 			
-			Class[] paramaterType = new Class[]{String.class};
+			Class[] parameterType = new Class[]{String.class};
 			
 			log.info("===command.method_name : " + methodName);
 			
 			
 			try {
 				Object instance = kakaoCommandClass.newInstance();
-				Method method = kakaoCommandClass.getDeclaredMethod(methodName, paramaterType);
+				Method method = kakaoCommandClass.getDeclaredMethod(methodName, parameterType);
 				
 				messagevo = (messageVO)method.invoke(instance, new Object[]{content});
 			} catch (InstantiationException e) {
