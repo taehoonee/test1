@@ -6,4 +6,5 @@ import kakao.plusfriend.autoreply.vo.kakaoVO;
 
 public interface ReplyDao {	
 	public List<Object> selectRegularContent(kakaoVO vo);
+	public Object selectRegularContent(String command);
 }

@@ -24,6 +24,10 @@
 	<bean id="mainDao" class="kakao.plusfriend.web.dao.mainDaoImplPostgresql" >
 		<property name="sqlSession" ref="sqlSession"></property>
 	</bean>
+
+	<bean id="kakaoCommand" class="kakao.plusfriend.autoreply.cmd.kakaoCommand" >
+	</bean>
+
 	
 	
 	<!-- PostgreSQL JDBC setting -->
