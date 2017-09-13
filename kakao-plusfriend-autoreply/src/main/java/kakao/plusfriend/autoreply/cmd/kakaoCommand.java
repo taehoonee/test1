@@ -20,7 +20,7 @@ public class kakaoCommand {
 			JSONArray data = openweathermapData.getData(googleAPIgeocode.getCode(address));
 			int loop = (7 < data.size()) ? 7 : data.size();
 			
-			builder.append("시엘이 미래를 보고 왔다는구나~ 한번 보자구나.\n");
+			builder.append("시엘이 미래를 보고 왔다는구나~ \n");
 			for (int i=0; i<loop; i++) {
 				JSONObject object = (JSONObject)data.get(i);
 				
@@ -34,8 +34,12 @@ public class kakaoCommand {
 				JSONArray arr = (JSONArray)object.get("weather");
 				JSONObject weather = (JSONObject)arr.get(0);
 				// 날씨 상태
-				String status = weather.get("main").toString();
+				String status = weather.get("description").toString();
 				
+				// 00일 03시 로 변경
+				dt_text = dt_text.substring(dt_text.indexOf("-", 1) + 1);
+				dt_text = dt_text.substring(0, dt_text.indexOf(":"));
+				dt_text = dt_text + "시";
 				
 				builder.append(dt_text);
 				builder.append(",");
@@ -48,7 +52,7 @@ public class kakaoCommand {
 			messagevo.getMessage().setText(builder.toString());
 				
 		} else {
-			messagevo.getMessage().setText("지역정보를 입력하지 않았느리라...알려주지 않으면 시엘이 찾을 수 없다구나!");
+			messagevo.getMessage().setText("지역정보를 입력하지 않았느리라...");
 		}
 		
 		
