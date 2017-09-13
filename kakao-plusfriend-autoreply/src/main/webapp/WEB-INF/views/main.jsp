@@ -9,6 +9,7 @@
 <title>루에게 공부시키는 장소</title>
 <link rel="icon" href="/kakao-plusfriend-autoreply/resources/images/favicon.png" type="image/png">
 <link href="/kakao-plusfriend-autoreply/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/kakao-plusfriend-autoreply/resources/bootstrap.select/bootstrap-select.min.css" rel="stylesheet">
 <link href="/kakao-plusfriend-autoreply/resources/bootstrap/css/cover.css" rel="stylesheet">
 <link href="/kakao-plusfriend-autoreply/resources/css/lu.css" rel="stylesheet">
 
@@ -95,10 +96,10 @@
 							<label for="reg_content" class="col-sm-2 control-label">링크</label>
 							<!-- <p class="lead">사용자가 말한 내용에서 필터링할 내용을 박스에 작성해주세요. 해당 필터링에 대한 텍스트를 루가 대답해줍니다.</p> -->
 							<div class="col-sm-4">
-								<select class="form-control" id="txt_id" name="txt_id" placeholder="예)오호~ 어서오너라!"></select>
+								<select class="form-control" id="txt_id" name="txt_id" placeholder="예)오호~ 어서오너라!" data-live-search="true"></select>
 							</div>
 							<div class="col-sm-3">
-								<select class="form-control" id="reg_id" name="reg_id" placeholder="예)안녕"></select>
+								<select class="form-control" id="reg_id" name="reg_id" placeholder="예)안녕" data-live-search="true"></select>
 							</div>
 							<div class="col-sm-3">
 								<button type="button" class="btn btn-success col-xs-12" id="link_content_btn">링크 저장</button>
@@ -125,6 +126,7 @@
 	
 	<script type="text/javascript" src="/kakao-plusfriend-autoreply/resources/jquery/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="/kakao-plusfriend-autoreply/resources/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/kakao-plusfriend-autoreply/resources/bootstrap.select/bootstrap-select.min.js"></script>
 	<script type="text/javascript">
 	/* 텍스트 저장 */
 	$('#txt_content_btn').on('click', function(){

@@ -12,4 +12,5 @@ public interface mainDao {
 	public List<Object> selectTextList();
 	public List<Object> selectRegularList();
 	public List<Object> selectTextAndRegularContentsList(contentVO vo);
+	public List<Object> selectTextJoinRegularList();
 }

@@ -31,9 +31,9 @@ public class mainController {
 		return "main";
 	}
 	
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public String list() {
-		return "list";
+	@RequestMapping(value="/view", method=RequestMethod.GET)
+	public String view() {
+		return "view";
 	}
 	
 	
@@ -93,7 +93,6 @@ public class mainController {
 	public @ResponseBody List<Object> textlist() {
 		log.info("===textlist");
 		List<Object> list = dao.selectTextList();
-		log.info("===selectTextList\t" + list);
 		return list;
 	}
 	
@@ -101,7 +100,14 @@ public class mainController {
 	public @ResponseBody List<Object> regularlist() {
 		log.info("===regularlist");
 		List<Object> list = dao.selectRegularList();
-		log.info("===selectRegularList\t" + list);
+		return list;
+	}
+	
+	
+	@RequestMapping(value="/joinlist", method=RequestMethod.POST)
+	public @ResponseBody List<Object> joinlist() {
+		log.info("===selectTextJoinRegularList");
+		List<Object> list = dao.selectTextJoinRegularList();
 		return list;
 	}
 }

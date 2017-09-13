@@ -10,7 +10,8 @@
 <link rel="icon" href="/kakao-plusfriend-autoreply/resources/images/favicon.png" type="image/png">
 <link href="/kakao-plusfriend-autoreply/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="/kakao-plusfriend-autoreply/resources/bootstrap/css/cover.css" rel="stylesheet">
-<link href="/kakao-plusfriend-autoreply/resources/datatable/jquery.dataTables.min.css" rel="stylesheet">
+<link href="/kakao-plusfriend-autoreply/resources/jsgrid-1.5.3/jsgrid.min.css" rel="stylesheet">
+<!-- <link href="/kakao-plusfriend-autoreply/resources/jsgrid-1.5.3/jsgrid-theme.min.css" type="theme" rel="stylesheet"> -->
 <link href="/kakao-plusfriend-autoreply/resources/css/lu.css" rel="stylesheet">
 
 
@@ -36,7 +37,8 @@
 				<div class="inner cover">
 					<img alt="루" src="/kakao-plusfriend-autoreply/resources/images/lu.png" class="col-xs-12"/>
 					<h1 class="cover-heading">우리 루는 뭘 공부했을까요?</h1>
-					<p class="lead">아직도 루가 모르는 언어가 잔득! 루에게 말을 알려주세요 ㅠㅠ  <code>http://pf.kakao.com/_rxmxmjxl</code>을 통해서 루와 플러스친구도 될 수 있습니다~</p>
+					<p class="lead">현재 매칭된 문장과 필터링을 보여주는 화면 입니다. 매칭되지 않는 애들은 한쪽이 비어있습니다.</p>
+					<div id="view-grid"></div>
 				</div>
 				<!-- <div class="mastfoot">
 					<div class="inner">
@@ -122,31 +124,80 @@
 	
 	<script type="text/javascript" src="/kakao-plusfriend-autoreply/resources/jquery/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="/kakao-plusfriend-autoreply/resources/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/kakao-plusfriend-autoreply/resources/bootstrap/js/jquery.dataTables.min.js"></script>
-	
+	<script type="text/javascript" src="/kakao-plusfriend-autoreply/resources/jsgrid-1.5.3/jsgrid.min.js"></script>
 	<script type="text/javascript">
+	var view_fields = [{
+        name: "txt_content",
+        type: "text",
+        title: "문장",
+        align: "center"
+    },{
+        name: "reg_content",
+        type: "text",
+        title: "필터링",
+        align: "center"
+    },{
+        name: "txt_create_date",
+        type: "text",
+        title: "문장 생성일"
+    },{
+        name: "txt_modify_date",
+        type: "text",
+        title: "문장 변경일"
+    },{
+        name: "reg_create_date",
+        type: "text",
+        title: "필터링 생성일"
+    },{
+        name: "reg_modify_date",
+        type: "text",
+        title: "필터링 변경일"
+    }];
+	
 	
 	
 	$(document).ready(function(){
 		$.ajax({
 			type : 'POST',
-			url : '/kakao-plusfriend-autoreply/textlist',
+			url : '/kakao-plusfriend-autoreply/joinlist',
 			datatype : 'json',
 			success: function(item) {
-				console.log(item);
+				createJSGrid('view-grid', item, view_fields);
 			}
 		});
 		
-		$.ajax({
-			type : 'POST',
-			url : '/kakao-plusfriend-autoreply/reglist',
-			datatype : 'json',
-			success: function(item) {
-				console.log(item);
-			}
-		});
 	});
 	
+	
+	function createJSGrid(id, data, fields) {
+        id = "#" + id;
+
+        $(id).jsGrid({
+            height: '500px',
+            width: "100%",
+            sorting: true,
+            paging: true,
+            pagerContainer: null,
+            pageIndex: 1,
+            pageSize: 5,
+            pageButtonCount: 5,
+            pagerFormat: "Pages: {first} {prev} {pages} {next} {last}    {pageIndex} of {pageCount}",
+            pagePrevText: "뒤로",
+            pageNextText: "다음",
+            pageFirstText: "처음",
+            pageLastText: "마지막",
+            pageNavigatorNextText: "...",
+            pageNavigatorPrevText: "...",
+            filtering: true,
+            controller: {
+                loadData: function(data) {
+                    return data;
+                }
+            },
+            data: data,
+            fields: fields
+        });
+    }
 	
 	</script>
 </body>

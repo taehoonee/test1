@@ -14,7 +14,7 @@
 		         #{content} like '%' || reg_content || '%'
 		)
 		
-		SELECT 
+		SELECT DISTINCT
 		    txt_content 
 		FROM 
 		    tbl_regular reg
@@ -92,7 +92,24 @@
 	  select
 	  	reg_id,
 	  	reg_content
-	  from 
+	 from 
 	  	tbl_kakao_reg_contents
+	  </select>
+	  
+	  <select id="selectTextJoinRegularList" resultType="java.util.Map">
+	  select
+		    txt.txt_content,
+		    reg.reg_content,
+		    to_char(txt.create_date, 'YYYY-MM-DD HH:MI:SS') AS txt_create_date,
+			to_char(txt.modify_date, 'YYYY-MM-DD HH:MI:SS') AS txt_modify_date,
+		    to_char(reg.create_date, 'YYYY-MM-DD HH:MI:SS') AS reg_create_date,
+			to_char(reg.modify_date, 'YYYY-MM-DD HH:MI:SS') AS reg_modify_date
+		from
+		    tbl_kakao_text_contents txt 
+		left outer join 
+		tbl_kakao_text_regular_link link 
+		on txt.txt_id = link.txt_id
+		right outer join      tbl_kakao_reg_contents reg 
+		on reg.reg_id = link.reg_id
 	  </select>
 </mapper>

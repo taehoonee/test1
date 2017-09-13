@@ -18,11 +18,11 @@
 	</bean>
 
 	<bean id="ReplyDao" class="kakao.plusfriend.autoreply.dao.ReplyDaoImplPostgresql" >
-		<property name="sqlSession" ref="sqlSession"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
 
 	<bean id="mainDao" class="kakao.plusfriend.web.dao.mainDaoImplPostgresql" >
-		<property name="sqlSession" ref="sqlSession"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
 
 	<bean id="kakaoCommand" class="kakao.plusfriend.autoreply.cmd.kakaoCommand" >

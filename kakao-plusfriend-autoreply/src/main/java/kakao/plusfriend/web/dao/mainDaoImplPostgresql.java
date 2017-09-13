@@ -32,17 +32,24 @@ public class mainDaoImplPostgresql implements mainDao{
 	
 	@Override
 	public List<Object> selectTextList() {
-		return sqlSession.selectList("selectTextList");
+		return sqlSession.selectList("kakaoTextReply.selectTextList");
 	}
 	
 	@Override
 	public List<Object> selectRegularList() {
-		return sqlSession.selectList("selectRegularList");
+		return sqlSession.selectList("kakaoTextReply.selectRegularList");
 	}
 
 	@Override
 	public List<Object> selectTextAndRegularContentsList(contentVO vo) {
-		return sqlSession.selectList("selectTextAndRegularContentsList", vo);
+		return sqlSession.selectList("kakaoTextReply.selectTextAndRegularContentsList", vo);
 	}
+	
+
+	@Override
+	public List<Object> selectTextJoinRegularList() {
+		return sqlSession.selectList("kakaoTextReply.selectTextJoinRegularList");
+	}
+	
 	
 }

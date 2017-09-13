@@ -36,17 +36,10 @@ public class kakaoCommand {
 				// 날씨 상태
 				String status = weather.get("description").toString();
 				
-				// 00일 03시 로 변경
-				dt_text = dt_text.substring(dt_text.indexOf("-", 1) + 1);
-				dt_text = dt_text.substring(0, dt_text.indexOf(":"));
-				dt_text = dt_text + "시";
+				String line = "%s, %s, 최저%sº 최고%sº\n";
+				line = String.format(line, dt_text, status, temp_min, temp_max);
 				
-				builder.append(dt_text);
-				builder.append(",");
-				builder.append(status);
-				builder.append(",최저");
-				builder.append(temp_min + "º 최고");
-				builder.append(temp_max + "º\n");	
+				builder.append(line);
 			}
 			
 			messagevo.getMessage().setText(builder.toString());
@@ -64,7 +57,15 @@ public class kakaoCommand {
 	public messageVO list(String content) {
 		messageVO messagevo = new messageVO();
 		messagevo.getMessage().setText("하하햣! 이몸이 공부한 것들이니라!!\n 시엘이 알고싶으면 "
-			+ " http://220.230.124.70/kakao-plusfriend-autoreply/list 로 들어가보라 하는구나!");
+			+ " http://220.230.124.70/kakao-plusfriend-autoreply/view 로 들어가보라 하는구나!");
+		return messagevo;
+	}
+	
+	
+	/** 검색 api 를 이용하여 검색기능 활성화 */
+	public messageVO search(String content) {
+		messageVO messagevo = new messageVO();
+		
 		return messagevo;
 	}
 	
