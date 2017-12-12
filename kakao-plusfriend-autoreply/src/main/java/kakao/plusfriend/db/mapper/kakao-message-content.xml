@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kakao">
+
+	<!-- 검색 -->
+	<select id="selectRegularContent" parameterType="kakao.plusfriend.autoreply.vo.kakaoVO" resultType="java.util.Map">
+	    select 
+	        content,
+	        type,
+	        classpath,
+	        method
+	    from
+	        tbl_kakao_contents
+	    where
+	         #{content} like '%' || regular || '%'
+	</select>
+</mapper>

@@ -13,19 +13,12 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
 
-	<bean id="kakaoMessage" class="kakao.plusfriend.autoreply.kakaoMessage">
-		<property name="dao" ref="ReplyDao"></property>
+	<bean id="kakaoMessage" class="kakao.plusfriend.autoreply.KakaoMessage">
+		<property name="dao" ref="KakaoMessageDao"></property>
 	</bean>
 
-	<bean id="ReplyDao" class="kakao.plusfriend.autoreply.dao.ReplyDaoImplPostgresql" >
+	<bean id="KakaoMessageDao" class="kakao.plusfriend.autoreply.dao.KakaoMessageDao" >
 		<property name="sqlSession" ref="sqlSession"></property>
-	</bean>
-
-	<bean id="mainDao" class="kakao.plusfriend.web.dao.mainDaoImplPostgresql" >
-		<property name="sqlSession" ref="sqlSession"></property>
-	</bean>
-
-	<bean id="kakaoCommand" class="kakao.plusfriend.autoreply.cmd.kakaoCommand" >
 	</bean>
 
 	

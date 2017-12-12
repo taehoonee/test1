@@ -1,4 +1,4 @@
-package kakao.plusfriend.autoreply.cmd.weather;
+package kakao.plusfriend.autoreply.command;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,10 +12,104 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-/** GOOGLE API 를 통해 지역의 좌표값을 가지고 온다. */
-public class googleAPIgeocode {
+import kakao.plusfriend.autoreply.vo.messageVO;
 
-	public static JSONObject getCode(String korAddress) {
+public class OpenWeatherAPI {
+	// openweathermap 에서 가져온 appid 
+	private final String appid = "6cc14edeb67a82ce1478e3d0a967827e";
+		
+	
+	/** 해당 지역의 날씨 정보를 받아온다. */
+	public messageVO run(String content) {
+		messageVO messagevo = new messageVO();
+		String address = (content.indexOf(' ') != -1) ? content.substring(content.indexOf(' ') + 1) : null;
+		StringBuilder builder = new StringBuilder();
+		
+		if (address != null) {
+			JSONArray data = getWeatherData(getLocationCode(address));
+			int loop = (7 < data.size()) ? 7 : data.size();
+			
+			builder.append("시엘이 미래를 보고 왔다는구나~ \n");
+			for (int i=0; i<loop; i++) {
+				JSONObject object = (JSONObject)data.get(i);
+				
+				String dt_text = object.get("dt_txt").toString();
+				JSONObject main = (JSONObject)object.get("main");
+				
+				// 최저 , 최고 기온
+				String temp_min = main.get("temp_min").toString();
+				String temp_max = main.get("temp_max").toString();
+				
+				JSONArray arr = (JSONArray)object.get("weather");
+				JSONObject weather = (JSONObject)arr.get(0);
+				// 날씨 상태
+				String status = weather.get("description").toString();
+				
+				String line = "%s, %s, 최저%sº 최고%sº\n";
+				line = String.format(line, dt_text, status, temp_min, temp_max);
+				
+				builder.append(line);
+			}
+			
+			messagevo.getMessage().setText(builder.toString());
+				
+		} else {
+			messagevo.getMessage().setText("지역정보를 입력하지 않았느리라...");
+		}
+		
+		
+		return messagevo;
+	}
+	
+	// http://openweathermap.org/appid
+	/** 날시정보를 가져옴 */
+	public JSONArray getWeatherData(JSONObject location) {
+		JSONArray data = null;
+		HttpURLConnection connection = null;
+		BufferedReader reader = null;
+		StringBuilder stringBuilder;
+
+		
+		String urlStr = "http://api.openweathermap.org/data/2.5/forecast?lat=%s&lon=%s&appid=%s&units=Metric&lang=kr";
+		String lat = location.get("lat").toString();
+		String lng = location.get("lng").toString();
+		
+		try {
+		urlStr = String.format(urlStr, lat, lng, appid);
+		URL url = new URL(urlStr);
+		
+		connection = (HttpURLConnection) url.openConnection();
+		connection.setReadTimeout(1000);
+		if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+			reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			stringBuilder = new StringBuilder();
+			
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				stringBuilder.append(line + "\n");
+			}
+			
+			Object object =  JSONValue.parse(stringBuilder.toString());
+			location = (JSONObject) object;
+			
+			data = (JSONArray) location.get("list");
+
+		}
+		
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return data;
+	}
+	
+	
+	/** 위치코드를 가져옴 */
+	public JSONObject getLocationCode(String korAddress) {
 		JSONObject location = null;
 		String urlStr;
 		HttpURLConnection connection = null;
@@ -65,8 +159,8 @@ public class googleAPIgeocode {
 		return getGridXY(location);
 	}
 	
-	 /** 위경도 좌표로 격자 X Y 좌표 구하기 */
-	private static JSONObject getGridXY(JSONObject location) {
+	/** 위경도 좌표로 격자 X Y 좌표 구하기 */
+	private JSONObject getGridXY(JSONObject location) {
 		
     	double RE = 6371.00877; // 지구 반경(km)
         double GRID = 5.0; // 격자 간격(km)
@@ -116,6 +210,4 @@ public class googleAPIgeocode {
 		}
         return location;
 	}
-
-
 }

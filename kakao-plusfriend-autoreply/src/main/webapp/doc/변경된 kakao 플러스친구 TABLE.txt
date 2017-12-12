@@ -1,0 +1,30 @@
+table name : tbl_kakao_contents
+
+id : 해당 ID
+
+content : 출력할 내용
+
+regular : 필터링 내역
+
+type : 커멘드(c) / 텍스트(t) 타입 
+
+classpath : type 이 커맨드일시 해당 커멘드의 classpath를 가져옴
+
+method : 해당 classpath에서 실행해야할 method
+
+createdt : 생성일
+
+modifydt : 변경일
+
+create sequence tbl_kakao_contents_seq;
+create table tbl_kakao_contents (
+id integer default nextval('tbl_kakao_contents_seq'),
+content text not null,
+regular text not null,
+type  char(1) not null,
+classpath text default null,
+method text default null,
+createdt timestamp default now(),
+modifydt timestamp default now(),
+constraint txt_content_pk primary key (id)
+);
