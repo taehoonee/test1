@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import kakao.plusfriend.autoreply.vo.kakaoVO;
+import kakao.plusfriend.autoreply.vo.searchVO;
 
 public class KakaoMessageDao {
 	@Autowired
@@ -16,7 +17,7 @@ public class KakaoMessageDao {
 
 
 
-	public List<Object> selectRegularContent(kakaoVO vo) {
+	public List<Object> selectRegularContent(searchVO vo) {
 		List<Object> list = sqlSession.selectList("kakao.selectRegularContent", vo);
 		return list;
 	}

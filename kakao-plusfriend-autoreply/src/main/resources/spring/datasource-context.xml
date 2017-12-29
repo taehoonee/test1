@@ -6,29 +6,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	  http://www.springframework.org/schema/context 
   http://www.springframework.org/schema/context/spring-context-3.1.xsd">
-	
-	
-	<context:annotation-config/>
-	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
 
-	<bean id="kakaoMessage" class="kakao.plusfriend.autoreply.KakaoMessage">
-		<property name="dao" ref="KakaoMessageDao"></property>
-	</bean>
-
-	<bean id="KakaoMessageDao" class="kakao.plusfriend.autoreply.dao.KakaoMessageDao" >
-		<property name="sqlSession" ref="sqlSession"></property>
-	</bean>
-
-	
-	
 	<!-- PostgreSQL JDBC setting -->
 	<bean id="dataSourceInfo" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-        <!-- 
-        <property name="url" value="jdbc:postgresql://220.230.124.70:5432/kakaoapidb"/>
-         -->
+        <!-- <property name="url" value="jdbc:postgresql://220.230.124.70:5432/kakaoapidb"/> -->
+
         <property name="url" value="jdbc:postgresql://127.0.0.1:5432/kakaoapidb"/>
         <property name="username" value="kakaoapi"/>
         <property name="password" value="1qazxsw@"/>
@@ -58,29 +41,4 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 	
-	
-	
-
-
-
-
-	<!-- Mybatis setting -->
-<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/kakaoapidb"/>
-        <property name="username" value="kakaoapi"/>
-        <property name="password" value="1qazxsw@"/>
-    </bean>
-
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="mapperLocations" value="/WEB-INF/db/mapper/*.xml" />
-    </bean>
-     
-    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSession"/>
-    </bean> 
- -->
-
-
 </beans>
